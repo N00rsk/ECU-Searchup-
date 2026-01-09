@@ -45,16 +45,33 @@ function oppdaterTabell(data) {
     }
 
     data.forEach(ecu => {
+        // Vi lager en lenke til Bosch for hvert HW-nummer
+        const boschUrl = `https://www.bosch-repair-service.com/en/?s=${encodeURIComponent(ecu.hw_number)}`;
+        
         const rad = `
             <tr>
                 <td>${ecu.brand}</td>
                 <td>${ecu.ecu_type}</td>
-                <td>${ecu.hw_number}</td>
+                <td>
+                    <a href="${boschUrl}" target="_blank" rel="noopener noreferrer" title="Søk hos Bosch" style="color: #e30613; text-decoration: none; font-weight: bold;">
+                        ${ecu.hw_number} 🔗
+                    </a>
+                </td>
                 <td>${ecu.processor || 'Ikke oppgitt'}</td>
             </tr>
         `;
         tableBody.innerHTML += rad;
     });
+}
+
+// Funksjon for den eksterne søkeknappen (brukes i index.html)
+function searchBosch() {
+    const searchTerm = document.getElementById('searchInput').value.trim();
+    if (searchTerm) {
+        window.open('https://www.bosch-repair-service.com/en/?s=' + encodeURIComponent(searchTerm), '_blank');
+    } else {
+        alert('Vennligst skriv inn et HW-nummer i søkefeltet først.');
+    }
 }
 
 // Kjør funksjonen når nettsiden åpnes
