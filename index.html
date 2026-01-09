@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="no">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ECU LOOK UP | Professional Database</title>
+    <title>ECU LOOK UP </title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
@@ -38,12 +38,28 @@
 <body class="p-4 md:p-8">
 
     <div class="max-w-6xl mx-auto">
-        <div class="flex flex-col items-center mb-12">
+        <div class="flex flex-col items-center mb-10">
             <div class="w-16 h-1 bg-blue-500 mb-4 rounded-full shadow-[0_0_15px_#3b82f6]"></div>
             <h1 class="header-font text-3xl md:text-5xl font-bold tracking-widest text-white italic">
                 ECU<span class="text-blue-500">LOOK</span>UP
             </h1>
-            <p class="text-slate-400 mt-2 text-sm uppercase tracking-widest font-light">Advanced Hardware Database</p>
+            <p class="text-slate-400 mt-2 text-sm uppercase tracking-widest font-light">Community Driven Hardware Database</p>
+        </div>
+
+        <div class="glass-card border-l-4 border-amber-500 p-5 rounded-2xl mb-8 bg-amber-900/10">
+            <div class="flex items-center gap-4">
+                <div class="text-amber-500">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
+                    </svg>
+                </div>
+                <div>
+                    <h4 class="text-amber-500 font-bold uppercase text-xs tracking-wider">Attention Required</h4>
+                    <p class="text-slate-300 text-sm leading-relaxed">
+                        Always double check ECU numbers. This site can be wrong since all data comes from forums and community sources. Proceed at your own risk.
+                    </p>
+                </div>
+            </div>
         </div>
 
         <div class="glass-card p-6 rounded-3xl shadow-2xl mb-10">
@@ -55,16 +71,13 @@
                         </svg>
                     </span>
                     <input type="text" id="searchInput" 
-                           placeholder="Søk på merke, ECU eller HW-nummer..." 
+                           placeholder="Search Brand, ECU model or HW-number..." 
                            class="custom-input w-full pl-12 pr-4 py-4 rounded-2xl outline-none text-white transition-all">
                 </div>
                 
                 <button onclick="searchBosch()" 
-                        class="bg-red-600 hover:bg-red-500 text-white px-6 py-4 rounded-2xl font-bold flex items-center justify-center gap-2 transition-transform active:scale-95 shadow-lg shadow-red-900/20">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
-                        <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM9.555 7.168A1 1 0 008 8v4a1 1 0 001.555.832l3-2a1 1 0 000-1.664l-3-2z" clip-rule="evenodd" />
-                    </svg>
-                    Check Bosch Site
+                        class="bg-red-600 hover:bg-red-500 text-white px-8 py-4 rounded-2xl font-bold flex items-center justify-center gap-2 transition-transform active:scale-95 shadow-lg shadow-red-900/20">
+                    Search Bosch Archive
                 </button>
             </div>
         </div>
@@ -74,29 +87,27 @@
                 <table id="resultTable" class="w-full text-left">
                     <thead>
                         <tr class="bg-slate-800/50 border-b border-slate-700">
-                            <th class="p-5 text-blue-400 font-bold uppercase text-xs tracking-tighter">Merke</th>
-                            <th class="p-5 text-blue-400 font-bold uppercase text-xs tracking-tighter">ECU Type</th>
-                            <th class="p-5 text-blue-400 font-bold uppercase text-xs tracking-tighter text-center">HW Nummer</th>
-                            <th class="p-5 text-blue-400 font-bold uppercase text-xs tracking-tighter">Prosessor</th>
+                            <th class="p-5 text-blue-400 font-bold uppercase text-xs tracking-widest">Brand</th>
+                            <th class="p-5 text-blue-400 font-bold uppercase text-xs tracking-widest">ECU Type</th>
+                            <th class="p-5 text-blue-400 font-bold uppercase text-xs tracking-widest text-center">HW Number</th>
+                            <th class="p-5 text-blue-400 font-bold uppercase text-xs tracking-widest">Processor</th>
                         </tr>
                     </thead>
                     <tbody id="tableBody" class="divide-y divide-slate-800/50 text-slate-300">
                         <tr class="hover:bg-blue-500/5 transition-colors">
                             <td class="p-5 font-semibold">BMW</td>
                             <td class="p-5">Bosch EDC17C50</td>
-                            <td class="p-5 text-center font-mono text-white bg-slate-900/50 rounded-lg">0281031123</td>
-                            <td class="p-5">
-                                <span class="bg-blue-900/30 text-blue-400 px-3 py-1 rounded-full text-xs border border-blue-500/20">TC1797</span>
-                            </td>
+                            <td class="p-5 text-center font-mono text-white bg-slate-900/40 rounded-lg">0281031123</td>
+                            <td class="p-5 text-xs">TC1797</td>
                         </tr>
                     </tbody>
                 </table>
             </div>
         </div>
 
-        <p class="text-center text-slate-500 mt-8 text-xs italic">
-            * Alltid verifiser HW-nummer fysisk på ECU før du flasher.
-        </p>
+        <footer class="mt-12 text-center text-slate-600 text-xs tracking-widest uppercase">
+            &copy; 2025 ECULOOKUP - Professional Tuning Resources
+        </footer>
     </div>
 
     <script src="script.js"></script>
