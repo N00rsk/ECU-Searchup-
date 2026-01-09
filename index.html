@@ -5,13 +5,19 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ECU Hardware Finder</title>
     <link rel="stylesheet" href="style.css">
-    
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 </head>
 <body>
     <div class="container">
         <h1>ECU Hardware Finder</h1>
-        <input type="text" id="searchInput" placeholder="Søk på merke, ECU eller HW-nummer...">
+        
+        <div class="search-container" style="display: flex; gap: 10px; margin-bottom: 20px;">
+            <input type="text" id="searchInput" placeholder="Søk på merke, ECU eller HW-nummer..." style="flex: 1;">
+            <button onclick="searchBosch()" style="padding: 10px; cursor: pointer; background-color: #e30613; color: white; border: none; border-radius: 4px; font-weight: bold;">
+                Sjekk Bosch Reparasjon
+            </button>
+        </div>
+
         <table id="resultTable">
             <thead>
                 <tr>
